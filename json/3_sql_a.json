@@ -1,0 +1,73 @@
+[
+    {
+        "id": "619e9dc3056f8f44",
+        "type": "tab",
+        "label": "sql-a",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1b5a3073516a9b78",
+        "type": "mqtt in",
+        "z": "619e9dc3056f8f44",
+        "name": "listen everything",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "047f66b61c6d89a7",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 500,
+        "y": 60,
+        "wires": [
+            [
+                "09b99e1f4950a4dd"
+            ]
+        ]
+    },
+    {
+        "id": "09b99e1f4950a4dd",
+        "type": "debug",
+        "z": "619e9dc3056f8f44",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "047f66b61c6d89a7",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "172.19.0.1",
+        "port": "1883",
+        "clientid": "node-red",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

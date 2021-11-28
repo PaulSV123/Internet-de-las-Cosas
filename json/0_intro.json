@@ -1,0 +1,55 @@
+[
+    {
+        "id": "c4afbf009f0785ab",
+        "type": "tab",
+        "label": "0_intro",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ca8de097d62332b6",
+        "type": "inject",
+        "z": "c4afbf009f0785ab",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "f993722e8763231b"
+            ]
+        ]
+    },
+    {
+        "id": "f993722e8763231b",
+        "type": "debug",
+        "z": "c4afbf009f0785ab",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 140,
+        "wires": []
+    }
+]

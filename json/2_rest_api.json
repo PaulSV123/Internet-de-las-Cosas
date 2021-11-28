@@ -1,0 +1,121 @@
+[
+    {
+        "id": "bac77e9de86e2e88",
+        "type": "tab",
+        "label": "REST API",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "baacca4c344c11df",
+        "type": "http in",
+        "z": "bac77e9de86e2e88",
+        "name": "",
+        "url": "/pub/:topic/:payload",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "809c47db948d9b96"
+            ]
+        ]
+    },
+    {
+        "id": "3e5e165a6a1fdcae",
+        "type": "mqtt out",
+        "z": "bac77e9de86e2e88",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "047f66b61c6d89a7",
+        "x": 610,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "809c47db948d9b96",
+        "type": "function",
+        "z": "bac77e9de86e2e88",
+        "name": "create message",
+        "func": "msg.topic = msg.req.params.topic;\nmsg.payload = msg.req.params.payload;\nmsg.qos = 2;\nmsg.retain = false;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 200,
+        "wires": [
+            [
+                "a878c53d915823df",
+                "3e5e165a6a1fdcae"
+            ]
+        ]
+    },
+    {
+        "id": "a878c53d915823df",
+        "type": "function",
+        "z": "bac77e9de86e2e88",
+        "name": "create response",
+        "func": "msg.payload = {\n success: true,\n message: \"published \" + msg.req.params.topic + \"/\" + msg.req.params.payload\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 200,
+        "wires": [
+            [
+                "3acde2d43efc3629"
+            ]
+        ]
+    },
+    {
+        "id": "3acde2d43efc3629",
+        "type": "http response",
+        "z": "bac77e9de86e2e88",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 820,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "047f66b61c6d89a7",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "172.19.0.1",
+        "port": "1883",
+        "clientid": "node-red",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

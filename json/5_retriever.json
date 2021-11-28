@@ -1,0 +1,117 @@
+[
+    {
+        "id": "a3de23f606093efa",
+        "type": "tab",
+        "label": "msj retriever",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "110c06cb26cbbba8",
+        "type": "http in",
+        "z": "a3de23f606093efa",
+        "name": "",
+        "url": "/get/:topic",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 120,
+        "wires": [
+            [
+                "df1b6b6ff6b75e22"
+            ]
+        ]
+    },
+    {
+        "id": "29433d49bf6a3b74",
+        "type": "http in",
+        "z": "a3de23f606093efa",
+        "name": "",
+        "url": "/get/:topic/last/:count",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "df1b6b6ff6b75e22"
+            ]
+        ]
+    },
+    {
+        "id": "df1b6b6ff6b75e22",
+        "type": "function",
+        "z": "a3de23f606093efa",
+        "name": "Create query",
+        "func": "// if required record count is not specified\n// set default to 1\nif(!msg.req.params.count)\n msg.req.params.count = 1;\n// build the sql query\nmsg.topic = \"SELECT id,topic,payload,timestamp \" +\n \"FROM thingData \" +\n \"WHERE topic='\" + escape(msg.req.params.topic) + \"' \" +\n \"AND deleted=0 \" +\n \"ORDER BY id DESC \" +\n \"LIMIT \" + msg.req.params.count + \";\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 180,
+        "wires": [
+            [
+                "d6d059d528defd46"
+            ]
+        ]
+    },
+    {
+        "id": "d6d059d528defd46",
+        "type": "mysql",
+        "z": "a3de23f606093efa",
+        "mydb": "6d8729e59a4d1151",
+        "name": "",
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "b4c62040fddd2524"
+            ]
+        ]
+    },
+    {
+        "id": "045ce187404b2258",
+        "type": "http response",
+        "z": "a3de23f606093efa",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 510,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b4c62040fddd2524",
+        "type": "function",
+        "z": "a3de23f606093efa",
+        "name": "prepare response",
+        "func": "",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [
+                "045ce187404b2258"
+            ]
+        ]
+    },
+    {
+        "id": "6d8729e59a4d1151",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "172.19.0.1",
+        "port": "3306",
+        "db": "tSeriesDB",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
